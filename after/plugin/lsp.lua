@@ -7,6 +7,7 @@ lsp.ensure_installed({
   'sumneko_lua',
   'pyright',
   'rust_analyzer',
+  'clangd',
 })
 
 local cmp = require('cmp')
@@ -25,10 +26,7 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = false,
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
+
     }
 })
 
@@ -42,7 +40,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "<leader>ch", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
 lsp.setup()
