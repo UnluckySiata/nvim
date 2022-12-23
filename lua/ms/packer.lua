@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('kdheepak/lazygit.nvim')
+  use('vale1410/vim-minizinc')
 
   use {
       'VonHeikemen/lsp-zero.nvim',
