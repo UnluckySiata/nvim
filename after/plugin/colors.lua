@@ -9,4 +9,5 @@ function ColorSet(color)
 
 end
 
+-- ColorSet('tokyonight-night')
 ColorSet()
