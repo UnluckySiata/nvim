@@ -8,8 +8,11 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   
   -- Colorschemes
-  use('rose-pine/neovim')
   use('folke/tokyonight.nvim')
+  use({
+	  'rose-pine/neovim',
+	  as = 'rose-pine'
+  })
 
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
