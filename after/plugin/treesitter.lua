@@ -1,3 +1,6 @@
+if not pcall(require, 'nvim-treesitter') then
+    return
+end
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"

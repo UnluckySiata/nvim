@@ -1,3 +1,6 @@
+if not pcall(require, "rose-pine") then
+    return
+end
 
 function ColorSet(color)
     color = color or "rose-pine"
