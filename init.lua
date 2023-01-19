@@ -1,2 +1,1 @@
-require("ms.remap")
-require("ms.set")
+require('ms')
