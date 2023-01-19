@@ -1,3 +1,7 @@
+if not pcall(require, 'telescope') then
+    return
+end
+
 local builtin = require('telescope.builtin')
 
 -- Buffers
