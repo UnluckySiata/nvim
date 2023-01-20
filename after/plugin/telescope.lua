@@ -16,7 +16,10 @@ vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>lr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, {})
 vim.keymap.set('n', '<leader>lgd', builtin.lsp_definitions, {})
+-- Workspace diagnostics
 vim.keymap.set('n', '<leader>ld', builtin.diagnostics, {})
+-- Current file diagnostics
+vim.keymap.set('n', '<leader>lfd', function() builtin.diagnostics{bufnr=0} end, {})
 
 -- Treesitter
 vim.keymap.set('n', '<leader>ts', builtin.treesitter, {})
