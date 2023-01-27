@@ -2,6 +2,16 @@ if not pcall(require, 'lsp-zero') then
     return
 end
 
+require("neodev").setup({
+    library = {
+        plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+    },
+    override = function(root_dir, library)
+        library.enabled = true
+        library.plugins = true
+    end,
+})
+
 local lsp = require('lsp-zero')
 
 lsp.preset("recommended")
@@ -27,7 +37,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-Space>"] = cmp.mapping.complete(cmp_select),
 })
 
 lsp.setup_nvim_cmp({
@@ -36,9 +46,6 @@ lsp.setup_nvim_cmp({
 
 lsp.set_preferences({
     suggest_lsp_servers = true,
-    sign_icons = {
-
-    }
 })
 
 vim.diagnostic.config({
