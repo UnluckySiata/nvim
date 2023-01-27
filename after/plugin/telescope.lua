@@ -4,6 +4,11 @@ end
 
 local builtin = require('telescope.builtin')
 
+-- Vim
+vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>vmh', builtin.man_pages, {})
+vim.keymap.set('n', '<leader>vk', builtin.keymaps, {})
+
 -- Buffers
 vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
 
