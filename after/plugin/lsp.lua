@@ -1,64 +1,44 @@
-if not pcall(require, 'lsp-zero') then
-    return
-end
+local ok, lspconfig = pcall(require, "lspconfig")
+if not ok then return end
 
-require("neodev").setup({
-    library = {
-        plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
-    },
-    override = function(root_dir, library)
-        library.enabled = true
-        library.plugins = true
-    end,
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local cmp_lsp = require("cmp_nvim_lsp")
+
+mason.setup()
+mason_lspconfig.setup({
+    ensure_installed = {
+        "sumneko_lua"
+    }
 })
 
-local lsp = require('lsp-zero')
-
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-    'sumneko_lua',
-})
-
--- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
-    settings = {
+local servers = {
+    sumneko_lua = {
         Lua = {
             diagnostics = {
                 globals = { 'vim' }
             }
         }
     }
-})
+}
 
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(cmp_select),
-})
+local capabilities = cmp_lsp.default_capabilities()
 
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
-
-lsp.set_preferences({
-    suggest_lsp_servers = true,
-})
-
-vim.diagnostic.config({
-    virtual_text = true,
-})
-
-lsp.on_attach(function(client, bufnr)
+local on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.signature_help() end, opts)
-end)
+end
 
-lsp.setup()
+mason_lspconfig.setup_handlers({
+    function(server_name)
+        lspconfig[server_name].setup({
+            settings = servers[server_name] or {},
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+    end
+})
