@@ -53,6 +53,9 @@ return require('packer').startup(function(use)
         requires = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+
+            -- Neovim development
+            'folke/neodev.nvim',
         }
     }
 
@@ -66,8 +69,12 @@ return require('packer').startup(function(use)
             'hrsh7th/cmp-nvim-lsp',
 
             -- Snippet engine
-            { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" },
-            'saadparwaiz1/cmp_luasnip'
+            { "L3MON4D3/LuaSnip", tag = "v1.*" },
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
+
+            -- Looks
+            'onsails/lspkind.nvim',
         }
     }
 
