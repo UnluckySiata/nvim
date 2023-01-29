@@ -9,7 +9,7 @@ vim.keymap.set({ "i", "s" }, "<c-k>", function ()
     if ls.expand_or_jumpable() then
         ls.expand_or_jump()
     else
-        cmp.confirm()
+        cmp.confirm({ select = true })
     end
 end, { silent = true })
 

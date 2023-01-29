@@ -1,79 +1,80 @@
 
 local ensure_packer = function()
     local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    local install_path = fn.stdpath "data".."/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        print 'Installing plugin manager..'
-        vim.cmd.packadd('packer.nvim')
+        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+        print "Installing plugin manager.."
+        vim.cmd.packadd("packer.nvim")
         return true
     end
     return false
 end
 
 local packer_bootstrap = ensure_packer()
+local packer = require("packer")
 
-return require('packer').startup(function(use)
+return packer.startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use "wbthomason/packer.nvim"
 
     -- Colorschemes
-    use('folke/tokyonight.nvim')
+    use "folke/tokyonight.nvim"
     use({
-        'rose-pine/neovim',
-        as = 'rose-pine'
+        "rose-pine/neovim",
+        as = "rose-pine"
     })
 
-    use('kyazdani42/nvim-web-devicons')
+    use "kyazdani42/nvim-web-devicons"
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        "nvim-telescope/telescope.nvim", branch = "0.1.x",
+        requires = { { "nvim-lua/plenary.nvim" } }
     }
 
     use {
-        'nvim-treesitter/nvim-treesitter',
+        "nvim-treesitter/nvim-treesitter",
         run = function()
-            pcall(require('nvim-treesitter.install').update { with_sync = true })
+            pcall(require("nvim-treesitter.install").update({ with_sync = true }))
         end
     }
 
-    use('theprimeagen/harpoon')
-    use('mbbill/undotree')
-    use('ggandor/leap.nvim')
-    use('numToStr/Comment.nvim')
-    use('kylechui/nvim-surround')
-    use('windwp/nvim-autopairs')
-    use('vale1410/vim-minizinc')
-    use('folke/neodev.nvim')
+    use "theprimeagen/harpoon"
+    use "mbbill/undotree"
+    use "ggandor/leap.nvim"
+    use "numToStr/Comment.nvim"
+    use "kylechui/nvim-surround"
+    use "windwp/nvim-autopairs"
+    use "vale1410/vim-minizinc"
+    use "folke/neodev.nvim"
     use {
-        'TimUntersberger/neogit',
+        "TimUntersberger/neogit",
         requires = {
-            'nvim-lua/plenary.nvim',
-            'sindrets/diffview.nvim'
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim"
         }
     }
 
     -- LSP
     use {
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         requires = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
 
             -- Neovim development
-            'folke/neodev.nvim',
+            "folke/neodev.nvim",
         }
     }
 
     -- Completion
     use {
-        'hrsh7th/nvim-cmp',
+        "hrsh7th/nvim-cmp",
         requires = {
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-nvim-lsp',
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
 
             -- Snippet engine
             { "L3MON4D3/LuaSnip", tag = "v1.*" },
@@ -81,13 +82,13 @@ return require('packer').startup(function(use)
             "rafamadriz/friendly-snippets",
 
             -- Looks
-            'onsails/lspkind.nvim',
+            "onsails/lspkind.nvim",
         }
     }
 
     if packer_bootstrap then
-        print 'Installing plugins..'
-        require('packer').sync()
+        print "Installing plugins.."
+        packer.sync()
     end
 
 end)
