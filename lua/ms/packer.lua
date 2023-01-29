@@ -43,11 +43,18 @@ return require('packer').startup(function(use)
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use('ggandor/leap.nvim')
-    use('kdheepak/lazygit.nvim')
     use('numToStr/Comment.nvim')
     use('kylechui/nvim-surround')
     use('windwp/nvim-autopairs')
     use('vale1410/vim-minizinc')
+    use('folke/neodev.nvim')
+    use {
+        'TimUntersberger/neogit',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim'
+        }
+    }
 
     use {
         'VonHeikemen/lsp-zero.nvim',
