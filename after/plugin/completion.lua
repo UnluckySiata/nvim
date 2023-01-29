@@ -2,7 +2,6 @@ local ok, cmp = pcall(require, "cmp")
 if not ok then return end
 
 local lspkind = require("lspkind")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
     mapping = {
