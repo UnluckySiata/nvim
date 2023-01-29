@@ -11,7 +11,6 @@ Some keybindings/plugins depend on:
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [tmux](https://github.com/tmux/tmux)
 - [tmux-sessionizer](https://github.com/jrmoulton/tmux-sessionizer)
-- [lazygit](https://github.com/jesseduffield/lazygit)
 - [neovide](https://github.com/neovide/neovide) (if you'd like a gui)
 
 **_Someday_ it will become decent (maybe)** 
