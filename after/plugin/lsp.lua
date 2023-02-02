@@ -23,7 +23,7 @@ local servers = {
     sumneko_lua = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
+                globals = { "vim" }
             }
         }
     }
@@ -34,10 +34,10 @@ local capabilities = cmp_lsp.default_capabilities()
 local on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.signature_help, opts)
 end
 
 mason_lspconfig.setup_handlers({
