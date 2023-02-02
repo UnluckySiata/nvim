@@ -24,12 +24,18 @@ return packer.startup(function(use)
         "rose-pine/neovim",
         as = "rose-pine"
     })
+    use { "catppuccin/nvim", as = "catppuccin" }
 
     use "kyazdani42/nvim-web-devicons"
 
     use {
         "nvim-telescope/telescope.nvim", branch = "0.1.x",
-        requires = { { "nvim-lua/plenary.nvim" } }
+        requires = {
+            "nvim-lua/plenary.nvim",
+            {"nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
+        }
     }
 
     use {
@@ -46,7 +52,6 @@ return packer.startup(function(use)
     use "kylechui/nvim-surround"
     use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
-    use "folke/neodev.nvim"
     use {
         "TimUntersberger/neogit",
         requires = {
