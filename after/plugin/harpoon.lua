@@ -9,8 +9,8 @@ local term = require("harpoon.term")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 
 vim.keymap.set("n", "<leader>pa", ui.toggle_quick_menu)
-vim.keymap.set("n", "<leader>pp", function() ui.nav_prev() end)
-vim.keymap.set("n", "<leader>pn", function() ui.nav_next() end)
+vim.keymap.set("n", "<leader>pp", ui.nav_prev)
+vim.keymap.set("n", "<leader>pn", ui.nav_next)
 
 for i = 1, 9 do
     vim.keymap.set("n", string.format("<leader>%s", i), function() ui.nav_file(i) end)
