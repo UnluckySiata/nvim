@@ -9,8 +9,6 @@ After cloning just let it install packer and plugins and restart neovim.
 
 Some keybindings/plugins depend on:
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [tmux](https://github.com/tmux/tmux)
-- [tmux-sessionizer](https://github.com/jrmoulton/tmux-sessionizer)
-- [neovide](https://github.com/neovide/neovide) (if you'd like a gui)
+- [fd](https://github.com/sharkdp/fd) (optional)
 
 **_Someday_ it will become decent (maybe)** 
