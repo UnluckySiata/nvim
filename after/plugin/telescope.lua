@@ -1,36 +1,60 @@
-if not pcall(require, 'telescope') then
-    return
-end
+local ok, telescope = pcall(require, "telescope")
+if not ok then return end
 
-local builtin = require('telescope.builtin')
+local builtin = require("telescope.builtin")
+
+telescope.setup({
+    defaults = {
+        layout_strategy = "horizontal",
+
+        layout_config = {
+
+          horizontal = {
+            height = 0.9,
+            preview_cutoff = 120,
+            prompt_position = "bottom",
+            width = 0.8
+          },
+
+        },
+        sorting_strategy = "descending",
+
+        prompt_position = "bottom",
+    },
+
+})
+
+telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
+telescope.load_extension("ui-select")
 
 -- Vim
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>vmh', builtin.man_pages, {})
-vim.keymap.set('n', '<leader>vk', builtin.keymaps, {})
+vim.keymap.set("n", "<leader>vh", builtin.help_tags)
+vim.keymap.set("n", "<leader>vmh", builtin.man_pages)
+vim.keymap.set("n", "<leader>vk", builtin.keymaps)
 
 -- Buffers
-vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
+vim.keymap.set("n", "<leader>bi", builtin.buffers)
 
 -- Project
-vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-vim.keymap.set('n', '<leader>pgf', builtin.git_files, {})
-vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
+vim.keymap.set("n", "<leader>pf", builtin.find_files)
+vim.keymap.set("n", "<leader>pgf", builtin.git_files)
+vim.keymap.set("n", "<leader>ps", builtin.live_grep)
+vim.keymap.set("n", "<leader>.", telescope.extensions.file_browser.file_browser)
+-- Git
+vim.keymap.set("n", "<leader>pc", builtin.git_commits)
+vim.keymap.set("n", "<leader>pb", builtin.git_branches)
+vim.keymap.set("n", "<leader>ps", builtin.git_status)
 
 -- LSP
-vim.keymap.set('n', '<leader>lr', builtin.lsp_references, {})
-vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, {})
-vim.keymap.set('n', '<leader>lgd', builtin.lsp_definitions, {})
+vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
+vim.keymap.set("n", "<leader>li", builtin.lsp_implementations)
+vim.keymap.set("n", "<leader>lgd", builtin.lsp_definitions)
 -- Workspace diagnostics
-vim.keymap.set('n', '<leader>ld', builtin.diagnostics, {})
+vim.keymap.set("n", "<leader>ld", builtin.diagnostics)
 -- Current file diagnostics
-vim.keymap.set('n', '<leader>lfd', function() builtin.diagnostics{bufnr=0} end, {})
+vim.keymap.set("n", "<leader>lfd", function() builtin.diagnostics({ bufnr=0 }) end)
 
 -- Treesitter
-vim.keymap.set('n', '<leader>ts', builtin.treesitter, {})
-
--- Git
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
-vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+vim.keymap.set("n", "<leader>ts", builtin.treesitter)
 
