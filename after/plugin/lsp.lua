@@ -5,6 +5,13 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local cmp_lsp = require("cmp_nvim_lsp")
 
+require("neodev").setup {
+    override = function(_, library)
+        library.enabled = true
+        library.plugins = true
+    end,
+}
+
 mason.setup()
 mason_lspconfig.setup({
     ensure_installed = {
