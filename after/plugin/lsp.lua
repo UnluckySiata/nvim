@@ -38,6 +38,21 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.signature_help, opts)
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function()
+            local window_opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, window_opts)
+        end
+})
 end
 
 mason_lspconfig.setup_handlers({
@@ -48,4 +63,8 @@ mason_lspconfig.setup_handlers({
             on_attach = on_attach,
         })
     end
+})
+
+vim.diagnostic.config({
+    virtual_text = false,
 })
