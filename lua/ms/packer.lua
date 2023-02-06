@@ -25,6 +25,7 @@ return packer.startup(function(use)
         as = "rose-pine"
     })
     use { "catppuccin/nvim", as = "catppuccin" }
+    use { "Shatur/neovim-ayu", as = "ayu" }
 
     use "kyazdani42/nvim-web-devicons"
 
