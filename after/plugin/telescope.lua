@@ -12,16 +12,22 @@ telescope.setup({
           horizontal = {
             height = 0.9,
             preview_cutoff = 120,
-            prompt_position = "bottom",
+            prompt_position = "top",
             width = 0.8
           },
 
-        },
-        sorting_strategy = "descending",
-
-        prompt_position = "bottom",
+      },
+      sorting_strategy = "ascending",
     },
 
+    extensions = {
+        file_browser = {
+            grouped = true,
+            previewer = false,
+            hijack_netrw = true,
+            theme = "dropdown"
+        },
+    },
 })
 
 telescope.load_extension("fzf")
