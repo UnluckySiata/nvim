@@ -31,7 +31,6 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
-telescope.load_extension("file_browser")
 telescope.load_extension("ui-select")
 
 -- Vim
@@ -46,7 +45,6 @@ vim.keymap.set("n", "<leader>bi", builtin.buffers)
 vim.keymap.set("n", "<leader>pf", builtin.find_files)
 vim.keymap.set("n", "<leader>pgf", builtin.git_files)
 vim.keymap.set("n", "<leader>ps", builtin.live_grep)
-vim.keymap.set("n", "<leader>.", telescope.extensions.file_browser.file_browser)
 -- Git
 vim.keymap.set("n", "<leader>pc", builtin.git_commits)
 vim.keymap.set("n", "<leader>pb", builtin.git_branches)

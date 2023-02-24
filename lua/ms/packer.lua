@@ -34,7 +34,6 @@ return packer.startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
             {"nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-            "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
         }
     }
@@ -53,6 +52,11 @@ return packer.startup(function(use)
     use "kylechui/nvim-surround"
     use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
+
+    -- filesystem management
+    use "stevearc/oil.nvim"
+
+    -- git
     use {
         "TimUntersberger/neogit",
         requires = {
@@ -61,6 +65,7 @@ return packer.startup(function(use)
         }
     }
 
+    -- note taking
     use {
         "nvim-neorg/neorg",
         requires = {
