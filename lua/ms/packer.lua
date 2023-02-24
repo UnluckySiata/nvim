@@ -61,6 +61,14 @@ return packer.startup(function(use)
         }
     }
 
+    use {
+        "nvim-neorg/neorg",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    }
+
     -- LSP
     use {
         "neovim/nvim-lspconfig",

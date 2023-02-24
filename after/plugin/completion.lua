@@ -21,6 +21,7 @@ cmp.setup({
         { name = "nvim_lsp" },
         { name = "path" },
         { name = "luasnip" },
+        { name = "neorg" },
         { name = "buffer", keyword_length = 4 },
     },
 
@@ -40,6 +41,7 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[api]",
                 path = "[path]",
+                neorg = "[neorg]",
                 luasnip = "[snip]",
             }
         })
