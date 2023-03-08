@@ -25,6 +25,7 @@ vim.g.maplocalleader = ","
 
 -- for neorg
 vim.opt.conceallevel = 2
+vim.opt.foldlevelstart = 99 -- no folds
 
 -- disable netrw
 vim.g.loaded_netrw = 1
