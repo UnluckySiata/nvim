@@ -16,3 +16,5 @@ for i = 1, 9 do
     vim.keymap.set("n", string.format("<leader>%s", i), function() ui.nav_file(i) end)
     vim.keymap.set("n", string.format("<leader>t%s", i), function() term.gotoTerminal(i) end)
 end
+
+vim.keymap.set("n", "<leader>tt", function () term.gotoTerminal(0) end)
