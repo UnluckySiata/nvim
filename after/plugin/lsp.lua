@@ -65,7 +65,10 @@ mason_lspconfig.setup_handlers({
     end
 })
 
-lspconfig.metals.setup({})
+lspconfig.metals.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
 
 vim.diagnostic.config({
     virtual_text = false,
