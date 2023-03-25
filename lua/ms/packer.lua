@@ -30,6 +30,11 @@ return packer.startup(function(use)
     use "kyazdani42/nvim-web-devicons"
 
     use {
+        "nvim-lualine/lualine.nvim",
+        requires = { "kyazdani42/nvim-web-devicons", opt = true }
+    }
+
+    use {
         "nvim-telescope/telescope.nvim", branch = "0.1.x",
         requires = {
             "nvim-lua/plenary.nvim",
@@ -106,6 +111,8 @@ return packer.startup(function(use)
             "onsails/lspkind.nvim",
         }
     }
+
+    use "unluckysiata/codebuddy.nvim"
 
     if packer_bootstrap then
         print "Installing plugins.."
