@@ -1,4 +1,5 @@
 require('ms.set')
+require('ms.globals')
 require('ms.keymaps')
 require('ms.packer')
 require('ms.neovide')
