@@ -46,9 +46,9 @@ vim.keymap.set("n", "<leader>pf", builtin.find_files)
 vim.keymap.set("n", "<leader>pgf", builtin.git_files)
 vim.keymap.set("n", "<leader>ps", builtin.live_grep)
 -- Git
-vim.keymap.set("n", "<leader>pc", builtin.git_commits)
-vim.keymap.set("n", "<leader>pb", builtin.git_branches)
-vim.keymap.set("n", "<leader>ps", builtin.git_status)
+vim.keymap.set("n", "<leader>pgc", builtin.git_commits)
+vim.keymap.set("n", "<leader>pgb", builtin.git_branches)
+vim.keymap.set("n", "<leader>pgs", builtin.git_status)
 
 -- LSP
 vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
