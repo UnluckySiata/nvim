@@ -109,6 +109,9 @@ return packer.startup(function(use)
 
             -- Looks
             "onsails/lspkind.nvim",
+
+            -- Additional sources
+            use "Saecki/crates.nvim"
         }
     }
 
