@@ -4,17 +4,17 @@ if not ok then return end
 neorg.setup({
     load = {
         ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.norg.concealer"] = {
+        ["core.concealer"] = {
             config = {
                 icon_preset = "diamond",
             },
         }, -- Adds pretty icons to your documents
-        ["core.norg.completion"] = {
+        ["core.completion"] = {
             config = {
                 engine = "nvim-cmp",
             },
         },
-        ["core.norg.dirman"] = { -- Manages Neorg workspaces
+        ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
                 workspaces = {
                     notes = "~/notes",
