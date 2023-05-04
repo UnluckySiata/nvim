@@ -58,6 +58,7 @@ return packer.startup(function(use)
     use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
     use "ellisonleao/glow.nvim"
+    use "j-hui/fidget.nvim"
 
     -- filesystem management
     use "stevearc/oil.nvim"
