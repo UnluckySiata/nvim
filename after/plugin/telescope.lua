@@ -45,8 +45,8 @@ vim.keymap.set("n", "<leader>pgb", builtin.git_branches)
 vim.keymap.set("n", "<leader>pgs", builtin.git_status)
 
 -- LSP
-vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
-vim.keymap.set("n", "<leader>li", builtin.lsp_implementations)
+vim.keymap.set("n", "<leader>lgr", builtin.lsp_references)
+vim.keymap.set("n", "<leader>lgi", builtin.lsp_implementations)
 vim.keymap.set("n", "<leader>lgd", builtin.lsp_definitions)
 -- Workspace diagnostics
 vim.keymap.set("n", "<leader>ld", builtin.diagnostics)
