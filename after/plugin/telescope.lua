@@ -21,12 +21,6 @@ telescope.setup({
     },
 
     extensions = {
-        file_browser = {
-            grouped = true,
-            previewer = false,
-            hijack_netrw = true,
-            theme = "dropdown"
-        },
     },
 })
 
