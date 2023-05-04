@@ -57,6 +57,7 @@ return packer.startup(function(use)
     use "kylechui/nvim-surround"
     use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
+    use "ellisonleao/glow.nvim"
 
     -- filesystem management
     use "stevearc/oil.nvim"
