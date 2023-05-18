@@ -9,5 +9,10 @@ fidget.setup({
         blend = 0,
         -- border = "rounded",
         relative = "editor",
-    }
+    },
+    sources = {
+        erlangls = {
+            ignore = true,
+        },
+    },
 })
