@@ -76,11 +76,27 @@ mason_lspconfig.setup_handlers({
     end
 })
 
+vim.diagnostic.config({
+    virtual_text = true,
+})
+
 lspconfig.metals.setup({
     capabilities = capabilities,
     on_attach = on_attach,
 })
 
-vim.diagnostic.config({
-    virtual_text = true,
-})
+local elixir
+ok, elixir = pcall(require, "elixir")
+if ok then
+    local elixirls = require("elixir.elixirls")
+    elixir.setup({
+        elixirls = {
+            branch = "master",
+            settings = elixirls.settings {
+                enableTestLenses = true,
+            },
+            on_attach = on_attach,
+        },
+    })
+end
+

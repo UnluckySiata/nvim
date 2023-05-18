@@ -94,6 +94,13 @@ return packer.startup(function(use)
             "folke/neodev.nvim",
         }
     }
+    use {
+        "elixir-tools/elixir-tools.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+        }
+    }
+
 
     -- Completion
     use {
