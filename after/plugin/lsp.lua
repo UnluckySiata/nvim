@@ -100,3 +100,50 @@ if ok then
     })
 end
 
+local rt
+ok, rt = pcall(require, "rust-tools")
+if ok then
+    local rt_on_attach = function(_, bufnr)
+        local opts = { buffer = bufnr, remap = false }
+
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "<leader>gtd", vim.lsp.buf.type_definition, opts)
+        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, opts)
+        vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+        vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+        vim.keymap.set("n", "<leader>wl", function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        vim.keymap.set("n", "<leader>f", function()
+            vim.lsp.buf.format { async = true }
+        end, opts)
+        -- Hover actions
+        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, opts)
+        -- Code action groups
+        vim.keymap.set("n", "<leader>la", rt.code_action_group.code_action_group, opts)
+
+
+        vim.api.nvim_create_autocmd("CursorHold", {
+            buffer = bufnr,
+            callback = function()
+                local window_opts = {
+                    focusable = false,
+                    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                    border = "rounded",
+                    source = "always",
+                    prefix = " ",
+                    scope = "cursor",
+                }
+                vim.diagnostic.open_float(nil, window_opts)
+            end
+        })
+    end
+    rt.setup({
+        server = {
+            on_attach = rt_on_attach,
+        },
+    })
+end
