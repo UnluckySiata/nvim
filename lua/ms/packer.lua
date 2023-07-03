@@ -58,14 +58,18 @@ return packer.startup(function(use)
     use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
     use "ellisonleao/glow.nvim"
-    use "j-hui/fidget.nvim"
+
+    use {
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+    }
 
     -- filesystem management
     use "stevearc/oil.nvim"
 
     -- git
     use {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         requires = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim"
