@@ -1,5 +1,20 @@
-if not pcall(require, 'Comment') then
-    return
-end
+local ok, comment = pcall(require, "Comment")
+if not ok then return end
 
-require('Comment').setup()
+comment.setup {
+    toggler = {
+        line = "zcc",
+        block = "zbc"
+    },
+
+    opleader = {
+        line = "zc",
+        block = "zb"
+    },
+
+    extra = {
+        above = "zcO",
+        below = "zco",
+        eol = "zca"
+    }
+}
