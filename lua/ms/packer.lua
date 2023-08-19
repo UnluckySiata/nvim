@@ -31,7 +31,9 @@ return packer.startup(function(use)
 
     use {
         "nvim-lualine/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true }
+        requires = {
+            { "kyazdani42/nvim-web-devicons", opt = true },
+        }
     }
 
     use {
@@ -105,8 +107,6 @@ return packer.startup(function(use)
         }
     }
 
-    use "simrat39/rust-tools.nvim"
-
 
     -- Completion
     use {
@@ -124,9 +124,6 @@ return packer.startup(function(use)
 
             -- Looks
             "onsails/lspkind.nvim",
-
-            -- Additional sources
-            use "Saecki/crates.nvim"
         }
     }
 
