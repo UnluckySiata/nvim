@@ -34,6 +34,7 @@ vim.keymap.set("n", "<leader>vk", builtin.keymaps)
 
 -- Buffers
 vim.keymap.set("n", "<leader>bi", builtin.buffers)
+vim.keymap.set("n", "<leader>bs", builtin.current_buffer_fuzzy_find)
 
 -- Project
 vim.keymap.set("n", "<leader>pf", builtin.find_files)
