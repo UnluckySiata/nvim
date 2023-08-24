@@ -54,7 +54,7 @@ return packer.startup(function(use)
 
     use "theprimeagen/harpoon"
     use "mbbill/undotree"
-    use "ggandor/leap.nvim"
+    use "folke/flash.nvim"
     use "numToStr/Comment.nvim"
     use "kylechui/nvim-surround"
     use "windwp/nvim-autopairs"
