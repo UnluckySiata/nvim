@@ -22,6 +22,7 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>bp", ":bprev<CR>", { silent = true })
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { silent = true })
+vim.keymap.set("v", "<leader>bg", "\"vy:vim /<C-r>v/%<CR>")
 
 vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true })
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
