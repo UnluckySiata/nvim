@@ -136,7 +136,10 @@ return packer.startup(function(use)
         }
     }
 
-    use "unluckysiata/codebuddy.nvim"
+    use {
+        "unluckysiata/codebuddy.nvim",
+        branch = "develop"
+    }
 
     if packer_bootstrap then
         print "Installing plugins.."
