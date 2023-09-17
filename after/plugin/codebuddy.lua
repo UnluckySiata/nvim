@@ -20,7 +20,7 @@ cb.setup {
             run = "erl -pa out"
         },
         python = {
-            run = "python3 {file}"
+            run = "python3 {file}.{ext}"
         },
         rust = {
             build = "cargo build",
