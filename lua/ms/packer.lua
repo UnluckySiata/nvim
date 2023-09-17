@@ -108,6 +108,14 @@ return packer.startup(function(use)
         }
     }
 
+    -- DAP
+    use {
+        "mfussenegger/nvim-dap",
+        requires = {
+            "rcarriga/nvim-dap-ui",
+            "theHamsta/nvim-dap-virtual-text",
+        }
+    }
 
     -- Completion
     use {
