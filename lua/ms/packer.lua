@@ -138,7 +138,7 @@ return packer.startup(function(use)
 
     use {
         "unluckysiata/codebuddy.nvim",
-        branch = "develop"
+        branch = "dev"
     }
 
     if packer_bootstrap then
