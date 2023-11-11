@@ -32,7 +32,7 @@ local tokyonight
 ok, tokyonight = pcall(require, "tokyonight")
 if ok then
     tokyonight.setup({
-        style = "moon",
+        style = "dark",
         transparent = true,
     })
 end
