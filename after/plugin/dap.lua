@@ -37,11 +37,7 @@ dap.configurations.c = {
     stopOnEntry = false,
     args = function ()
         local input = vim.fn.input("args: ")
-        local res = {}
-        for token in string.gmatch(input, "%w+") do
-            table.insert(res, token)
-        end
-        return res
+        return vim.split(input, " ")
     end
   },
 }
