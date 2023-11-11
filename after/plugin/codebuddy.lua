@@ -26,6 +26,10 @@ cb.setup {
             build = "cargo build",
             run = "cargo run"
         },
+        java = {
+            build = "gradle build",
+            run = "gradle run"
+        },
     }
 
 }
