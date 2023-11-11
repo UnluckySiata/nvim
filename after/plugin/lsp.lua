@@ -71,6 +71,26 @@ local on_attach = function(_, bufnr)
             scope = "line",
         }
     end, opts)
+    vim.keymap.set("n", "[d", function()
+        vim.diagnostic.goto_prev {
+            float = {
+                border = "rounded",
+                source = "always",
+                prefix = " ",
+                scope = "line",
+            }
+        }
+    end, opts)
+    vim.keymap.set("n", "]d", function()
+        vim.diagnostic.goto_next {
+            float = {
+                border = "rounded",
+                source = "always",
+                prefix = " ",
+                scope = "line",
+            }
+        }
+    end, opts)
 end
 
 mason_lspconfig.setup_handlers({
