@@ -7,7 +7,14 @@ cmp.setup {
     mapping = cmp.mapping.preset.insert {
         ["<c-b>"] = cmp.mapping.scroll_docs(-4),
         ["<c-f>"] = cmp.mapping.scroll_docs(4),
-        ["<c-e>"] = cmp.mapping.close(),
+        ["<c-e>"] = cmp.mapping.abort(),
+        ["<c-l>"] = function ()
+            if cmp.visible_docs() then
+                cmp.close_docs()
+            else
+                cmp.open_docs()
+            end
+        end,
         ["<s-tab>"] = cmp.mapping.select_prev_item(),
         ["<tab>"] = cmp.mapping.select_next_item(),
         ["<c-y>"] = cmp.mapping.confirm({
@@ -30,16 +37,27 @@ cmp.setup {
         documentation = cmp.config.window.bordered(),
     },
 
+    preselect = "None";
+
     snippet = {
         expand = function(args)
             require("luasnip").lsp_expand(args.body)
         end
     },
 
+    view = {
+        docs = {
+            auto_open = false,
+        },
+    },
+
     formatting = {
+        expandable_indicator = true,
+        fields = { "abbr", "kind", "menu" },
+
         format = lspkind.cmp_format({
             with_text = true,
-            maxwidth = 40,
+            maxwidth = function() return math.floor(0.4 * vim.o.columns) end,
             ellipsis_char = "..",
             menu = {
                 buffer = "[buf]",
@@ -58,5 +76,14 @@ cmp.setup.cmdline({ "/", "?" }, {
     sources = {
         { name = "buffer" }
     }
+})
+
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path" }
+  }, {
+    { name = "cmdline" }
+  })
 })
 
