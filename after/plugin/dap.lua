@@ -36,6 +36,34 @@ dap.adapters.codelldb = {
 }
 
 
+dap.adapters.debugpy = function(cb, config)
+    if config.request == "attach" then
+        ---@diagnostic disable-next-line: undefined-field
+        local port = (config.connect or config).port
+        ---@diagnostic disable-next-line: undefined-field
+        local host = (config.connect or config).host or "127.0.0.1"
+        cb({
+            type = "server",
+            port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+            host = host,
+            options = {
+                source_filetype = "python",
+            },
+        })
+    else
+        cb({
+            type = "executable",
+            command = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python3",
+            args = { "-m", "debugpy.adapter" },
+            options = {
+                source_filetype = "python",
+            },
+        })
+    end
+end
+
+
+
 local configs = {}
 local function mk_config(type)
     return {
@@ -64,6 +92,18 @@ configs.rust_gdb = mk_config("rust_gdb")
 dap.configurations.c = configs.codelldb
 dap.configurations.cpp = configs.codelldb
 dap.configurations.rust = configs.codelldb
+
+
+dap.configurations.python = {
+    {
+        type = "debugpy",
+        request = "launch",
+        name = "Launch file",
+
+        program = "${file}",
+        pythonPath = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python3",
+    },
+}
 
 
 vim.keymap.set("n", "<F5>", dap.continue)
