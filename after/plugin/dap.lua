@@ -63,6 +63,15 @@ dap.adapters.debugpy = function(cb, config)
 end
 
 
+dap.adapters.delve = {
+    type = "server",
+    port = "${port}",
+    executable = {
+        command = vim.fn.stdpath "data" .. "/mason/packages/delve/dlv",
+        args = { "dap", "-l", "127.0.0.1:${port}" },
+    }
+}
+
 
 local configs = {}
 local function mk_config(type)
@@ -103,6 +112,30 @@ dap.configurations.python = {
         program = "${file}",
         pythonPath = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python3",
     },
+}
+
+
+dap.configurations.go = {
+    {
+        type = "delve",
+        name = "Debug",
+        request = "launch",
+        program = "${file}"
+    },
+    {
+        type = "delve",
+        name = "Debug test",
+        request = "launch",
+        mode = "test",
+        program = "${file}"
+    },
+    {
+        type = "delve",
+        name = "Debug test (go.mod)",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}"
+    }
 }
 
 
