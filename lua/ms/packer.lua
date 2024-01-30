@@ -19,13 +19,10 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim"
 
     -- Colorschemes
-    use "folke/tokyonight.nvim"
-    use({
+    use {
         "rose-pine/neovim",
         as = "rose-pine"
-    })
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use { "Shatur/neovim-ayu", as = "ayu" }
+    }
 
     use "kyazdani42/nvim-web-devicons"
 
