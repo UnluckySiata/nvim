@@ -4,6 +4,7 @@ if not ok then return end
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local cmp_lsp = require("cmp_nvim_lsp")
+local lsp_lines = require("lsp_lines")
 
 require("neodev").setup {
     override = function(_, library)
@@ -12,12 +13,18 @@ require("neodev").setup {
     end,
 }
 
-mason.setup()
-mason_lspconfig.setup({
+mason.setup {
+    ui = {
+        border = "rounded"
+    }
+}
+mason_lspconfig.setup {
     ensure_installed = {
         "lua_ls"
     }
-})
+}
+
+lsp_lines.setup()
 
 local servers = {
     lua_ls = {
@@ -63,6 +70,8 @@ local on_attach = function(_, bufnr)
         }
     end, opts)
 
+    -- diagnostics
+    vim.keymap.set("n", "<leader>ltl", lsp_lines.toggle, opts)
     vim.keymap.set("n", "<leader>lk", function()
         vim.diagnostic.open_float {
             border = "rounded",
@@ -123,17 +132,3 @@ lspconfig.metals.setup({
     on_attach = on_attach,
 })
 
-local elixir
-ok, elixir = pcall(require, "elixir")
-if ok then
-    local elixirls = require("elixir.elixirls")
-    elixir.setup({
-        elixirls = {
-            branch = "master",
-            settings = elixirls.settings {
-                enableTestLenses = true,
-            },
-            on_attach = on_attach,
-        },
-    })
-end
