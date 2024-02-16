@@ -34,6 +34,19 @@ local servers = {
             }
         }
     },
+    clangd = {
+        cmd = {
+            "clangd",
+            "--all-scopes-completion",
+            "--background-index",
+            "--clang-tidy",
+            "--completion-style=detailed",
+            "--fallback-style=Google",
+            "--function-arg-placeholders",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+        }
+    }
 }
 
 local capabilities = cmp_lsp.default_capabilities()
