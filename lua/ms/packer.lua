@@ -101,12 +101,6 @@ return packer.startup(function(use)
             "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         }
     }
-    use {
-        "elixir-tools/elixir-tools.nvim",
-        requires = {
-            "nvim-lua/plenary.nvim",
-        }
-    }
 
     -- DAP
     use {
