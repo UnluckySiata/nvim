@@ -15,7 +15,7 @@ rosepine.setup({
     variant = "main",
 
     styles = {
-        bold = false,
+        bold = true,
         italic = false,
         transparency = true
     },
