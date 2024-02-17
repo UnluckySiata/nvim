@@ -25,7 +25,7 @@ dap.adapters.codelldb = {
     port = "${port}",
 
     executable = {
-        command = vim.fn.stdpath "data" .. "/mason/packages/codelldb/extension/adapter/codelldb",
+        command = "codelldb",
         args = { "--port", "${port}" },
     },
 
@@ -53,7 +53,7 @@ dap.adapters.debugpy = function(cb, config)
     else
         cb({
             type = "executable",
-            command = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python3",
+            command = "python3",
             args = { "-m", "debugpy.adapter" },
             options = {
                 source_filetype = "python",
@@ -67,7 +67,7 @@ dap.adapters.delve = {
     type = "server",
     port = "${port}",
     executable = {
-        command = vim.fn.stdpath "data" .. "/mason/packages/delve/dlv",
+        command = "dlv",
         args = { "dap", "-l", "127.0.0.1:${port}" },
     }
 }
@@ -110,7 +110,7 @@ dap.configurations.python = {
         name = "Launch file",
 
         program = "${file}",
-        pythonPath = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python3",
+        pythonPath = "python3",
     },
 }
 
