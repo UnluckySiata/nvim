@@ -1,6 +1,7 @@
 local ok, lspconfig = pcall(require, "lspconfig")
 if not ok then return end
 
+local cmp_lsp = require("cmp_nvim_lsp")
 local lsp_lines = require("lsp_lines")
 
 lsp_lines.setup()
@@ -69,7 +70,11 @@ local on_attach = function(_, bufnr)
     end, opts)
 end
 
+-- server configurations
+local capabilities = cmp_lsp.default_capabilities()
+
 lspconfig.clangd.setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     cmd = {
         "clangd",
@@ -84,11 +89,14 @@ lspconfig.clangd.setup {
     }
 }
 
+
 lspconfig.rust_analyzer.setup {
-    on_attach = on_attach
+    capabilities = capabilities,
+    on_attach = on_attach,
 }
 
 lspconfig.lua_ls.setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         Lua = {
