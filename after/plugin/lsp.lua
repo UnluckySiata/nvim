@@ -72,48 +72,61 @@ end
 
 -- server configurations
 local capabilities = cmp_lsp.default_capabilities()
+local servers = {
+    rust_analyzer = {},
+    gopls = {},
+    nixd = {},
+    pyright = {},
+    jdtls = {},
+    elixirls = {},
+    erlangls = {},
 
-lspconfig.clangd.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    cmd = {
-        "clangd",
-        "--all-scopes-completion",
-        "--background-index",
-        "--clang-tidy",
-        "--completion-style=detailed",
-        "--fallback-style=Google",
-        "--function-arg-placeholders",
-        "--header-insertion=iwyu",
-        "--header-insertion-decorators",
-    }
-}
+    html = {},
+    htmx = {},
+    templ = {},
 
-
-lspconfig.rust_analyzer.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-
-lspconfig.lua_ls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT"
-            },
-            -- Make the server aware of Neovim runtime files
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME
+    lua_ls = {
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT"
+                },
+                -- Make the server aware of Neovim runtime files
+                workspace = {
+                    checkThirdParty = false,
+                    library = {
+                        vim.env.VIMRUNTIME
+                    }
                 }
             }
+        }
+
+    },
+
+    clangd = {
+        cmd = {
+            "clangd",
+            "--all-scopes-completion",
+            "--background-index",
+            "--clang-tidy",
+            "--completion-style=detailed",
+            "--fallback-style=Google",
+            "--function-arg-placeholders",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
         }
     }
 }
 
+for name, cfg in pairs(servers) do
+    local base_config = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+    local config = vim.tbl_deep_extend("force", base_config, cfg)
+
+    lspconfig[name].setup(config)
+end
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover,
