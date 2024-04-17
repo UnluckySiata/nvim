@@ -46,8 +46,26 @@ local servers = {
             "--header-insertion=iwyu",
             "--header-insertion-decorators",
         }
-    }
+    },
 }
+
+-- per-project lsp server setup
+local local_config = vim.fs.find(".nv/lsp.lua", {
+    upward = true,
+    stop = vim.loop.os_homedir(),
+})
+
+local file = local_config[1]  -- first matching path or nil
+
+if file then
+    local cfg = dofile(file)
+
+    if cfg then
+        -- overwrite with values from cfg on conflict
+        servers = vim.tbl_deep_extend("force", servers, cfg)
+    end
+end
+
 
 local capabilities = cmp_lsp.default_capabilities()
 
