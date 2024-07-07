@@ -96,6 +96,7 @@ return packer.startup(function(use)
         "mfussenegger/nvim-dap",
         requires = {
             "rcarriga/nvim-dap-ui",
+            "nvim-neotest/nvim-nio",
             "theHamsta/nvim-dap-virtual-text",
         }
     }
