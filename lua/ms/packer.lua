@@ -76,17 +76,6 @@ return packer.startup(function(use)
         }
     }
 
-    -- note taking
-    use {
-        "nvim-neorg/neorg",
-        run = ":Neorg sync-parsers",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-neorg/neorg-telescope",
-        },
-    }
-
     -- LSP
     use {
         "neovim/nvim-lspconfig",
