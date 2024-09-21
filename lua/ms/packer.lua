@@ -54,7 +54,6 @@ return packer.startup(function(use)
     use "folke/flash.nvim"
     use "numToStr/Comment.nvim"
     use "kylechui/nvim-surround"
-    use "windwp/nvim-autopairs"
     use "vale1410/vim-minizinc"
     use "ellisonleao/glow.nvim"
 
