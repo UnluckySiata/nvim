@@ -25,6 +25,7 @@ mason_lspconfig.setup {
 }
 
 lsp_lines.setup()
+lsp_lines.toggle()
 
 local servers = {
     lua_ls = {
@@ -35,8 +36,11 @@ local servers = {
         }
     },
     clangd = {
+        filetypes = {
+            "c", "cpp"
+        },
         cmd = {
-            "clangd",
+            "clangd-18",
             "--all-scopes-completion",
             "--background-index",
             "--clang-tidy",
@@ -70,6 +74,8 @@ end
 local capabilities = cmp_lsp.default_capabilities()
 
 local on_attach = function(_, bufnr)
+    vim.lsp.inlay_hint.enable(true)
+
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -77,7 +83,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "gtd", vim.lsp.buf.type_definition, opts)
     vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, opts)
     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
@@ -161,5 +167,34 @@ vim.diagnostic.config({
 lspconfig.metals.setup({
     capabilities = capabilities,
     on_attach = on_attach,
+})
+
+lspconfig.clangd.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "c", "cpp" },
+    cmd = {
+        "clangd-18",
+        "--all-scopes-completion",
+        "--background-index",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--fallback-style=Google",
+        "--function-arg-placeholders",
+        "--header-insertion=iwyu",
+        "--header-insertion-decorators",
+    },
+}
+
+
+local augroup = vim.api.nvim_create_augroup("lsp", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.go" },
+    desc = "format file save (with lsp)",
+    group = augroup,
+    callback = function(_)
+        vim.lsp.buf.format({ timeout_ms = 3000 })
+    end
 })
 
