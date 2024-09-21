@@ -3,13 +3,12 @@ if not ok then return end
 
 local commands = {
     c = {
-        build = "clang-17 -Wall -g -o {file} {file_path}",
+        build = "clang-18 -Wall -g -o {file} {file_path}",
         run = "./{file}"
     },
     cpp = {
-        build = "clang++-17 -g -o {file} -std=c++2b -stdlib=libc++ {file_path}",
+        build = "clang++-18 -Wall -g -o {file} -std=c++23 -stdlib=libc++ {file_path}",
         run = "./{file}",
-        xd = "./{file}"
     },
     ex = {
         build = "mix compile",
@@ -27,8 +26,8 @@ local commands = {
         run = "cargo run"
     },
     go = {
-        build = "go build .",
-        run = "go run ."
+        build = "go build ./{relative_dir}",
+        run = "go run ./{relative_dir}"
     },
     java = {
         build = "gradle build",
@@ -42,6 +41,8 @@ cb:setup {
         { name = "build", keybind = { mode = "n", binding = "<leader>rc" } },
     },
     commands = commands,
+
+    local_cfg_file = ".nv/actions.lua",
 
     term = {
         no_number = true,
