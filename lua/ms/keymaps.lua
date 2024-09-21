@@ -22,7 +22,6 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>bp", ":bprev<CR>", { silent = true })
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { silent = true })
-vim.keymap.set("v", "<leader>bg", "\"vy:vim /<C-r>v/%<CR>")
 
 vim.keymap.set("n", "[q", ":cprevious<CR>", { silent = true })
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
@@ -31,5 +30,3 @@ vim.keymap.set("n", "]Q", ":clast<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("v", "<leader>s", "\"sy:%s/<C-r>s//gI<Left><Left><Left>")
-
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })

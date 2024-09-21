@@ -15,8 +15,8 @@ cmp.setup {
                 cmp.open_docs()
             end
         end,
-        ["<s-tab>"] = cmp.mapping.select_prev_item(),
-        ["<tab>"] = cmp.mapping.select_next_item(),
+        ["<c-p>"] = cmp.mapping.select_prev_item(),
+        ["<c-n>"] = cmp.mapping.select_next_item(),
         ["<c-y>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
@@ -25,8 +25,8 @@ cmp.setup {
     },
 
     sources = cmp.config.sources {
-        { name = "nvim_lua" },
-        { name = "nvim_lsp" },
+        { name = "nvim_lua", priority = 10 },
+        { name = "nvim_lsp", priority = 5},
         { name = "path" },
         { name = "luasnip" },
         { name = "neorg" },
