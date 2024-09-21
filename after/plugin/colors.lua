@@ -5,7 +5,7 @@ function ColorSet(color)
     -- transparency fixes
     vim.api.nvim_set_hl(0, "Winbar", { fg = "#f6c177", bg = "none" })
     vim.api.nvim_set_hl(0, "WinbarNC", { fg = "#f6c177", bg = "none" })
-
+    vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#cb99c9", bg = "none", blend = 10 })
 end
 
 local ok, rosepine = pcall(require, "rose-pine")
