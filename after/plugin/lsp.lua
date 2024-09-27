@@ -27,50 +27,6 @@ mason_lspconfig.setup {
 lsp_lines.setup()
 lsp_lines.toggle()
 
-local servers = {
-    lua_ls = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" }
-            }
-        }
-    },
-    clangd = {
-        filetypes = {
-            "c", "cpp"
-        },
-        cmd = {
-            "clangd-18",
-            "--all-scopes-completion",
-            "--background-index",
-            "--clang-tidy",
-            "--completion-style=detailed",
-            "--fallback-style=Google",
-            "--function-arg-placeholders",
-            "--header-insertion=iwyu",
-            "--header-insertion-decorators",
-        }
-    },
-}
-
--- per-project lsp server setup
-local local_config = vim.fs.find(".nv/lsp.lua", {
-    upward = true,
-    stop = vim.loop.os_homedir(),
-})
-
-local file = local_config[1]  -- first matching path or nil
-
-if file then
-    local cfg = dofile(file)
-
-    if cfg then
-        -- overwrite with values from cfg on conflict
-        servers = vim.tbl_deep_extend("force", servers, cfg)
-    end
-end
-
-
 local capabilities = cmp_lsp.default_capabilities()
 
 local on_attach = function(_, bufnr)
@@ -139,16 +95,6 @@ local on_attach = function(_, bufnr)
     end, opts)
 end
 
-mason_lspconfig.setup_handlers({
-    function(server_name)
-        lspconfig[server_name].setup({
-            settings = servers[server_name] or {},
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-    end
-})
-
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover,
     { border = "rounded" }
@@ -164,27 +110,78 @@ vim.diagnostic.config({
     inlay_hints = true,
 })
 
-lspconfig.metals.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
-lspconfig.clangd.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = { "c", "cpp" },
-    cmd = {
-        "clangd-18",
-        "--all-scopes-completion",
-        "--background-index",
-        "--clang-tidy",
-        "--completion-style=detailed",
-        "--fallback-style=Google",
-        "--function-arg-placeholders",
-        "--header-insertion=iwyu",
-        "--header-insertion-decorators",
+local servers = {
+    lua_ls = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" }
+            }
+        }
     },
 }
+
+local local_servers = {
+    clangd = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+            "c", "cpp"
+        },
+        cmd = {
+            "clangd",
+            "--all-scopes-completion",
+            "--background-index",
+            "--clang-tidy",
+            "--completion-style=detailed",
+            "--fallback-style=Google",
+            "--function-arg-placeholders",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+        }
+    },
+    rust_analyzer = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+    },
+    gopls = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+    }
+}
+
+
+-- per-project lsp server setup
+local local_config = vim.fs.find(".nv/lsp.lua", {
+    upward = true,
+    stop = vim.loop.os_homedir(),
+})
+
+local file = local_config[1] -- first matching path or nil
+
+if file then
+    local cfg = dofile(file)
+
+    if cfg then
+        -- overwrite with values from cfg on conflict
+        servers = vim.tbl_deep_extend("force", servers, cfg)
+        local_servers = vim.tbl_deep_extend("force", servers, cfg)
+    end
+end
+
+
+mason_lspconfig.setup_handlers {
+    function(server_name)
+        lspconfig[server_name].setup({
+            settings = servers[server_name] or {},
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+    end
+}
+
+for name, settings in pairs(local_servers) do
+    lspconfig[name].setup(settings)
+end
 
 
 local augroup = vim.api.nvim_create_augroup("lsp", { clear = true })
@@ -197,4 +194,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ timeout_ms = 3000 })
     end
 })
-
