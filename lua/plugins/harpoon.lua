@@ -12,7 +12,7 @@ return {
       vim.keymap.set("n", "<leader>pa", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
       for i = 1, 9 do
-        vim.keymap.set("n", string.format("<leader>%s"), function() harpoon:list():select(i) end)
+        vim.keymap.set("n", string.format("<leader>%s", i), function() harpoon:list():select(i) end)
       end
 
       vim.keymap.set("n", "<c-s-p>", function() harpoon:list():prev() end)

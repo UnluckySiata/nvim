@@ -26,4 +26,7 @@ require("lazy").setup {
   install = {
     missing = true,
   },
+  change_detection = {
+    enabled = false,
+  },
 }

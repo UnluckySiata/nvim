@@ -1,12 +1,12 @@
 return {
   {
     "stevearc/oil.nvim",
-    ---@module "oil"
-    ---@type oil.SetupOpts
-    opts = {},
     dependencies = { "echasnovski/mini.icons" },
-    setup = function()
-      vim.keymap.set("n", "<leader>.", require("oil").open)
+    config = function()
+      local oil = require("oil")
+
+      oil.setup()
+      vim.keymap.set("n", "<leader>.", oil.open)
     end
   }
 }

@@ -58,7 +58,10 @@ return {
   },
   {
     "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "folke/lazydev.nvim",
+    },
     version = "*",
 
     ---@module "blink.cmp"
@@ -85,6 +88,10 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "saghen/blink.cmp",
+      "folke/lazydev.nvim",
+    },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require("lspconfig")
