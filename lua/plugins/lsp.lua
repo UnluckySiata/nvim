@@ -3,6 +3,13 @@ local on_attach = function(_, bufnr)
 
   local opts = { buffer = bufnr, remap = false }
 
+  vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "gri", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, opts)
+  vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, opts)
+
   -- format file
   vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format { async = true }
@@ -67,11 +74,37 @@ return {
     ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<c-l>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<c-k>"] = { "snippet_forward", "fallback" },
+        ["<c-j>"] = { "snippet_backward", "fallback" },
+      },
 
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "mono"
+      },
+
+      completion = {
+        menu = {
+          border = "rounded",
+        },
+        list = {
+          selection = "auto_insert",
+        },
+        documentation = {
+          window = {
+            border = "rounded",
+          },
+        },
+      },
+
+      signature = {
+        enabled = true,
+        window = {
+          border = "rounded",
+        },
       },
 
       sources = {
@@ -147,7 +180,7 @@ return {
       -- per-project lsp server setup
       local local_config = vim.fs.find(".nv/lsp.lua", {
         upward = true,
-        stop = vim.loop.os_homedir(),
+        stop = vim.uv.os_homedir(),
       })
 
       local file = local_config[1] -- first matching path or nil

@@ -23,6 +23,9 @@ require("lazy").setup {
     patterns = {"unluckysiata"},
     fallback = true,
   },
+  ui = {
+    border = "rounded",
+  },
   install = {
     missing = true,
   },
