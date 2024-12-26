@@ -145,13 +145,7 @@ return {
       }
 
       local servers = {
-        lua_ls = {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        },
         clangd = {
-          capabilities = capabilities,
-          on_attach = on_attach,
           filetypes = {
             "c", "cpp"
           },
@@ -167,15 +161,17 @@ return {
             "--header-insertion-decorators",
           }
         },
-        rust_analyzer = {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        },
-        gopls = {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        }
+        lua_ls = {},
+        rust_analyzer = {},
+        gopls = {},
       }
+
+      -- extend server config with lsp servers installed in custom dir
+      for name, _ in vim.fs.dir("~/.local/bin/lsp") do
+        if pcall(require, "lspconfig.configs." .. name) then
+          servers[name] = {}
+        end
+      end
 
       -- per-project lsp server setup
       local local_config = vim.fs.find(".nv/lsp.lua", {
@@ -194,7 +190,12 @@ return {
         end
       end
 
+      local default_settings = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
       for name, settings in pairs(servers) do
+        settings = vim.tbl_deep_extend("force", default_settings, settings)
         lspconfig[name].setup(settings)
       end
 
