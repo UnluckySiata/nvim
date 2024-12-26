@@ -167,7 +167,7 @@ return {
       }
 
       -- extend server config with lsp servers installed in custom dir
-      for name, _ in vim.fs.dir("~/.local/bin/lsp") do
+      for name, _ in vim.fs.dir("~/source/lsp/servers") do
         if pcall(require, "lspconfig.configs." .. name) then
           servers[name] = {}
         end
