@@ -34,6 +34,9 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
+      dapui.setup()
+      require("nvim-dap-virtual-text").setup()
+
       -- requires gdb 14 or higher
       dap.adapters.gdb = {
         type = "executable",

@@ -3,11 +3,15 @@ local on_attach = function(_, bufnr)
 
   local opts = { buffer = bufnr, remap = false }
 
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "gri", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, opts)
 
   -- format file
@@ -91,7 +95,7 @@ return {
           border = "rounded",
         },
         list = {
-          selection = "auto_insert",
+          selection = { preselect = false, auto_insert = true },
         },
         documentation = {
           window = {
