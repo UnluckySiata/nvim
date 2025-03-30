@@ -11,8 +11,8 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "gri", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover { border = "rounded" } end, opts)
+  vim.keymap.set("i", "<c-s>", function() vim.lsp.buf.signature_help { border = "rounded" } end, opts)
 
   -- format file
   vim.keymap.set("n", "<leader>f", function()
@@ -38,7 +38,7 @@ local on_attach = function(_, bufnr)
     }
   end, opts)
   vim.keymap.set("n", "[d", function()
-    vim.diagnostic.goto_prev {
+    vim.lsp.diagnostic.goto_prev {
       float = {
         border = "rounded",
         source = true,
@@ -47,7 +47,7 @@ local on_attach = function(_, bufnr)
     }
   end, opts)
   vim.keymap.set("n", "]d", function()
-    vim.diagnostic.goto_next {
+    vim.lsp.diagnostic.goto_next {
       float = {
         border = "rounded",
         source = true,
@@ -132,16 +132,6 @@ return {
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require("lspconfig")
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = "rounded" }
-      )
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = "rounded" }
-      )
 
       vim.diagnostic.config {
         virtual_text = false,
