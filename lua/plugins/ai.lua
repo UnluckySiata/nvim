@@ -1,17 +1,17 @@
 return {
-    {
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       "zbirenbaum/copilot.lua",
       "nvim-lua/plenary.nvim",
     },
     build = "make tiktoken",
-    config = function ()
-     local chat = require("CopilotChat")
-     chat.setup {
-       model = "o1",
-     }
-     vim.keymap.set("n", "<leader>ac", chat.toggle)
+    config = function()
+      local chat = require("CopilotChat")
+      chat.setup {
+        model = "o1",
+      }
+      vim.keymap.set("n", "<leader>ac", chat.toggle)
     end
   },
   {
@@ -23,17 +23,13 @@ return {
     opts = {
       -- provider = "copilot",
       provider = "ollama",
-      copilot = {
-        endpoint = "https://api.githubcopilot.com",
-        model = "claude-3.5-sonnet",
-        proxy = nil,
-        allow_insecure = false,
-        timeout = 20000,
-        temperature = 0.1,
-        max_tokens = 16384,
-      },
-      ollama = {
-        model = "gemma3",
+      providers = {
+        copilot = {
+          model = "claude-3.5-sonnet",
+        },
+        ollama = {
+          model = "gemma3",
+        },
       },
     },
     build = "make",
