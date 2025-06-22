@@ -7,7 +7,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
   vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
+  vim.keymap.set({ "n", "v" }, "gra", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "grr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "gri", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, opts)
@@ -72,6 +72,8 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "folke/lazydev.nvim",
+      "yetone/avante.nvim",
+      "saghen/blink.compat",
     },
     version = "*",
 
@@ -93,6 +95,10 @@ return {
       completion = {
         menu = {
           border = "rounded",
+
+          draw = {
+            columns = { { "label" }, { "kind_icon", "kind", gap = 1 } },
+          }
         },
         list = {
           selection = { preselect = false, auto_insert = true },
@@ -112,13 +118,31 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer", "avante_commands", "avante_files", "avante_mentions" },
         providers = {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 100,
           },
+          avante_commands = {
+            name = "avante_commands",
+            module = "blink.compat.source",
+            score_offset = 90,
+            opts = {},
+          },
+          avante_files = {
+            name = "avante_files",
+            module = "blink.compat.source",
+            score_offset = 100,
+            opts = {},
+          },
+          avante_mentions = {
+            name = "avante_mentions",
+            module = "blink.compat.source",
+            score_offset = 1000,
+            opts = {},
+          }
         },
       },
     },
