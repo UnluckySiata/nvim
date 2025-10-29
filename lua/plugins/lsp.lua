@@ -38,7 +38,8 @@ local on_attach = function(_, bufnr)
     }
   end, opts)
   vim.keymap.set("n", "[d", function()
-    vim.lsp.diagnostic.goto_prev {
+    vim.diagnostic.jump {
+      count = -1,
       float = {
         border = "rounded",
         source = true,
@@ -47,7 +48,8 @@ local on_attach = function(_, bufnr)
     }
   end, opts)
   vim.keymap.set("n", "]d", function()
-    vim.lsp.diagnostic.goto_next {
+    vim.diagnostic.jump {
+      count = 1,
       float = {
         border = "rounded",
         source = true,
@@ -149,6 +151,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    version = "v2.5.0",
     dependencies = {
       "saghen/blink.cmp",
       "folke/lazydev.nvim",
