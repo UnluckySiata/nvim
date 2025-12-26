@@ -62,5 +62,29 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+  },
+  {
+    "NickvanDyke/opencode.nvim",
+    dependencies = {
+      ---@module "snacks"
+      "folke/snacks.nvim"
+    },
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {}
+
+      local oc = require("opencode")
+
+      vim.keymap.set({ "n", "t" }, "<leader>ot", function() oc.toggle() end, { desc = "Toggle opencode" })
+      vim.keymap.set({ "n", "x" }, "<leader>oa", function() oc.ask("@this: ", { submit = true }) end,
+        { desc = "Ask opencode" })
+      vim.keymap.set({ "n", "x" }, "<leader>ox", function() oc.select() end,
+        { desc = "Execute opencode action…" })
+
+      vim.keymap.set({ "n", "x" }, "<leader>or", function() return oc.operator("@this ") end,
+        { expr = true, desc = "Add range to opencode" })
+      vim.keymap.set("n", "<leader>ol", function() return oc.operator("@this ") .. "_" end,
+        { expr = true, desc = "Add line to opencode" })
+    end,
   }
 }
